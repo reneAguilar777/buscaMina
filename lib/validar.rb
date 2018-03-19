@@ -2,7 +2,7 @@ class Validar
 
 	def validarCelda(celda)
 
-	if celda.start_with? "12"
+	if celda.start_with? "2"
 		return "true"
 	else
 		return "false"
