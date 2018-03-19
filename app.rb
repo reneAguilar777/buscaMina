@@ -22,9 +22,9 @@ post '/validarCelda' do
 end
 
 get '/gano' do
-	erb: win
+	erb :win
 end
 
 get '/perdio' do
-	erb: lose
+	erb :lose
 end
