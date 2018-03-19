@@ -1,5 +1,7 @@
 require 'sinatra'
 
+require './lib/validar.rb'
+
 get '/' do
     "Buscaminas"
 end
@@ -13,11 +15,8 @@ post '/validarCelda' do
 	
 	@posicion = params['posicion']
 
-	if @posicion.start_with? "12"
-		return "true"
-	else
-		return "false"
-	end
+	v = Validar.new
+	return v.validarCelda(@posicion)
 
 end
 
