@@ -13,6 +13,8 @@ end
 
 
 get '/juego' do
+	v2 = Validar.new
+	v2.generaMina
 
 	@nombre = params['nombre']
 	@nivel = params['nivel']
