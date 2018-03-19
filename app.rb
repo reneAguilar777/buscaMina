@@ -7,7 +7,17 @@ get '/' do
 end
 
 
+get '/inicio' do
+    erb :inicio
+end
+
+
 get '/juego' do
+
+	@nombre = params['nombre']
+	@nivel = params['nivel']
+
+
     erb :buscaminas
 end
 
@@ -27,3 +37,5 @@ end
 get '/perdio' do
 	erb :lose
 end
+
+
