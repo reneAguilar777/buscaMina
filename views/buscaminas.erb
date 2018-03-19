@@ -1,11 +1,16 @@
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="jquery-3.3.1.min.js"></script>
 
 <style>
 
 .celdas{
-
-/*background: url("https://raw.githubusercontent.com/reneAguilar777/buscaMina/master/views/img/celda.jpg");*/
 background: url("/img/celda.jpg");
+color: red;
+width: 40px;
+height: 40px;
+}
+
+.celdaVacia{
+background: url("/img/libre.jpg");
 color: red;
 width: 40px;
 height: 40px;
@@ -16,16 +21,17 @@ height: 40px;
 <script>
 
 $(document).ready(function() {
+		var contador = 0;
 		$("#tablero tr td").on('click', function(event) {
 			event.preventDefault();
 			
-			
+			var p = $(this).attr('id');
 
 			$.ajax({
 				url: '/validarCelda',
 				type: 'POST',
 				dataType: 'json',
-				data: {posicion: $(this).attr('id')},
+				data: {posicion: p},
 				success: function(data){
 			
 
@@ -33,7 +39,17 @@ $(document).ready(function() {
 					window.location.href = "/perdio";
 				}
 				else{
+
+					$("#"+p).addClass("celdaVacia");
+					$("#"+p).removeClass("celdas");
+					contador++;
+				if(contador == 3){
 					window.location.href = "/gano";
+				}
+					
+
+					
+					
 				}
 					
 				}
@@ -45,20 +61,22 @@ $(document).ready(function() {
 </script>
 
 
+<h1>Bienvenido <%= @nombre %></h5>
+
+
+
+
 
 <table id="tablero" border="1">
-
+<% (1..@nivel.to_i).each do |i| %>
 <tr>
 
-<td id="11" class="celdas" >
+<% (1..@nivel.to_i).each do |j| %>
+<td id='<%= "#{j+(@nivel.to_i*(i-1))}" %>' class="celdas"> </td>
 
-</td>
-
-<td id="12" class="celdas" >
-
-</td>
-
+<% end %>
 
 </tr>
 
+<% end %>
 </table>
